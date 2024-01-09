@@ -1,0 +1,150 @@
+Aadhar verificaiton
+voter id verificaiton
+startupscreen
+
+[Authorization System]
+SESSION TOKENS are the way we do it.
+1) Once a user enters their credentials, the password is hashed and the hash along 
+2) with the email is sent through a form. The API endpoint then checks for the existence, of the said user by retrieving the password and Email from the database. 
+3) If the user exists, the API generates a session token and sends it back to the client.
+4) The session token is a cookie which is encrypted with AES and is stored in the browser.
+5) The session token is then sent with every request to the API. 
+6) The API then decrypts the session token and checks if the user exists in the token database.
+                        #########Power System#########
+7) Each User has general powers and circle specific powers. Each power is basically the name of the function which is binded to the endpoint in flask.
+8) Every time an endpoint, which requires a power, is called, the API checks if the user has the that function name in their power or not, if not, it returns a 403 error.
+9) The token can be essentially deleted thereby denying the user access to the API.
+10) Specific endpoints can also be controlled by the power system, for example, the endpoint to create a circle can be controlled by the power system, so that only users with the power to create a circle can create a circle.
+                        #########Usage Limit System#########
+11) The usage limit system is basically a system which limits the number of requests a user can make in a given time period. A special collection is created for this purpose. Named "GT: UsageLimit".
+
+[Circles System]
+The circle system basically consists of Information board.
+A Circle JSON:
+
+{
+    "DisplayName": "String",
+    "Description": "String",
+    "Circle_Tags": ["String"],
+    "Related_Circles": ["String"],
+    "Circle_Icon": "String",
+    "InformationBoard": [
+        {
+            "Title": "String",
+            "Description": "String",
+            "URL": "String",
+            "Image": "String",
+            "Tags": ["String"],
+        }
+    ],
+    "AnnouncementBoard": [
+        {
+            "Title": "String",
+            "Description": "String",
+            "URL": "String",
+            "Image": "String",
+            "Tags": ["String"],
+        }
+    ],
+}
+
+
+[Control Board for specific circle]
+                                             _
+1) Managing post reports.                     |
+2) Providing power access to the moderators.  |
+3) Kicking out users from the circle.         |
+3.1)  
+                                            --      These three come under the moderator control board.
+                                            _
+4) Managing the circle tags.                 |
+5) Managing the related circles.             |
+6) Managing the two boards.                  |
+                                            --      These three come under the circle control board.
+
+Types of Posts:
+1) POST
+3) COMMENTS
+4) REPLIES
+
+
+Get for Comments and their replies, we'll be using a flat structure:
+
+[
+    {
+        "PostId": "String",
+        "html_content": "String",
+        "Author": "String",
+    }
+
+]
+
+
+Circle Metadata:
+
+{
+    "type": "String",
+    "board_name": "String",
+    "content": [array]
+}
+
+Store the images in a separate collection, and store the URL in the post.
+
+
+[Notification System]
+
+1) The notification system is basically a system which notifies the user about the events which are happening in the circles they are a part of.
+2) We will be tracking the following:
+     These are category-1 notifications.
+   -> When comment is made on a post created by the user.
+   -> When a reply is made on a comment created by the user.
+   
+    These are category-2 notifications.
+   -> When a upvote is given to a post created by the user.   
+   -> When a downvote is given to a post created by the user.
+   -> When a upvote is given to a comment created by the user.
+   -> When a downvote is given to a comment created by the user.
+   
+    These are category-3 notifications.
+   -> Special notifications for the moderators of the circle.
+   -> Special notifications from the Admin.
+
+3) So, we for category-2 we will notify in exponential changes. For example, if a user gets 10 upvotes on a post, we will notify the user about the first 5 upvotes, and then we will notify the user about the next 5 upvotes after 5 minutes, and then we will notify the user
+   at 2 upvotes, at 5 upvotes, and then at 10 upvotes. Similarly for other category-2 notifications.
+4) For category-1 notifications, every time a notification is sent, we will send a notification.
+5) For category-3 notifications, we will send a notification every time a notification is sent.
+
+Action Sequence of category - 2 notifications:
+ -> A user upvotes a post successfully.
+ -> The API checks if the user has already been notified about the post.
+ -> If the user has not been notified, the API sends a notification to the user.
+
+Type:
+The array of notification types is:
+ ["New_Comment",
+  "New_Reply_Comment",
+   "support_POST",
+   "reject_POST",
+   "support_COMMENT",
+    "reject_COMMENT",
+    "support_REPLY_COMMENT",
+    "reject_REPLY_COMMENT",
+   "New_Post",
+   "New_Feature",
+   "New_Important_Circle_Announcement"]
+
+
+[Deleting of Posts]
+
+We want to not delete the posts from the database, but instead we want to hide them from the user.
+So, we will be using a flag called "is_deleted" which will be set to true when the post is deleted.
+This will help us in keeping the data of the user, and also in case of any legal issues.
+
+Which handle this?:
+isClosed= "Yes" or "No"
+isVisible= "Yes" or "No"
+
+How do you filter out New, Rising, and Hot?
+New: Sort by date. The newest post will be at the top (This is the default).
+Rising: Sort by the number of upvotes and rejeccts in the last 24 hours. The post with the highest number of upvotes and rejeccts in the last 24 hours will be at the top.
+Hot: Sort by the number of upvotes and rejects. The post with the highest number of upvotes and rejects will be at the top.

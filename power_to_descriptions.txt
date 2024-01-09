@@ -1,0 +1,229 @@
+ [
+                    "delete_circle", # API not Implemented
+                    "leave_circle",                             # Not in GUI. Except for the creator of the circle, all other users can leave the circle.
+                  
+                    # To provide access to the specific_circle_controlboard -- USED
+                      "specific_circle_controlboard_webpage",          
+                    # To provide access to the specific_circle_controlboard
+        
+                    # Used to get details of the circle for circle_details. High Level Security.  Circle Update Details -- USED
+                        "get_specific_circle_details_of_user",      
+                        "update_circle_details",
+                    # Used to get details of the circle for circle_details. High Level Security.  Circle Update Details
+                    
+                    # To provide access to add or update information board and title -- USED                      
+                      "create_title_and_subtitle",
+                      "update_circle_information_board",
+                      "create_information_board",
+                    # To provide access to add or update information board and title
+                            
+                    # Update user roles and powers . High Level Security. Need to check to the right on it. -- USED
+                        "get_circle_users_details",
+                        "update_user_circle_powers",
+                        "find_single_circle_user",
+                        "update_user_role",
+                    # Update user roles and powers
+
+                    # To update roles with flairs  -- USED
+                      "get_specific_role_flairs", # Needs check to the right on it.
+                      "update_circle_role_flair_tags", # Needs check to the right on it.
+                      "create_new_flair_tag",
+                      "delete_flair_tag_from_general_pool",                
+                    # To update roles with flairs
+
+                    # To be able to create Roles and Powers -- USED
+                      "get_all_circle_roles",
+                      "create_new_circle_role",
+                      "update_circle_role_powers", # Needs check to the right on it.
+                      "update_role_order", # Needs check to the right on it.
+                   # To be able to create Roles and Powers   
+
+                   # To moderate the reported posts  -- USED
+                      "get_reported_posts",
+                      "get_more_reasons_for_report",
+                      "find_reported_post",
+                      "admin_lock_post",
+                   # To moderate the reported posts  
+
+
+
+                    # Used to get all 3 POST, COMMENT and COMMENT_REPLY.     -- USED         
+                        "get_replies",
+                        "get_posts",
+                        "get_comments",
+                        "follow_unfollow_post", 
+                        "get_information_board_title_and_subtitle",
+                        "get_pictures_from_mongodb",
+                        "get_information_and_announcement_board",
+                        "get_pictures_from_mongodb_for_single_post",
+                        "get_flair_tags_for_editor",    
+                        "get_posts_multi_filter",
+                        "get_flair_tags_for_filters",
+                        "circle_search_engine",
+                        "get_all_flair_tags",
+                        "report_post",
+                        "get_root_comment",
+                    # Used to get all 3 POST, COMMENT and COMMENT_REPLY.
+                    # Used to support or reject posts, comments, replies and information cards in the circle -- USED
+                        "support_reject_info_card",
+                        "support_reject_post",
+                    # Used to support or reject posts, comments, replies and information cards in the circle
+
+                    # Used to update all 3 POST, COMMENT and COMMENT_REPLY.  -- USED
+                        "update_comment_post_reply",
+                    # Used to update all 3 POST, COMMENT and COMMENT_REPLY.
+
+                    # Used to create all 3 POST, COMMENT and COMMENT_REPLY. -- USED
+                        "create_comment_reply",
+                        "create_comment",
+                        "create_post",
+                    # Used to create all 3 POST, COMMENT and COMMENT_REPLY.
+
+                    # To be able to create role symbol to the right  -- USED
+                     "create_role_symbol",
+                    # To be able to create role to the right
+
+                    # To be able to close post  -- USED
+                      "close_post",
+                    # To be able to close post
+
+                    # To be able to pin or unpin post  -- USED
+                      "pin_unpin_post",
+                    # To be able to pin or unpin post
+
+                    # To be able to set default role for joining -- USED
+                      "set_default_role_for_joining", # Needs check to the right on it.
+                    # To be able to set default role for joining
+               #### THE MAIN STUFF WILL BE IN initialization_of_databases file. ####
+ ]               
+
+ A total of 47 powers are there in the circle.
+
+{
+  "type": "translation_of_powers_to_description",
+  "circle_powers_to_description_translation": [
+    {
+      "power_description": "Basic powers to get, follow, search and support/reject , posts, comments and replies in the circle",
+      "powers_list": [       
+                        "get_replies",
+                        "get_posts",
+                        "get_comments",
+                        "follow_unfollow_post", 
+                        "get_information_board_title_and_subtitle",
+                        "get_pictures_from_mongodb",
+                        "get_information_and_announcement_board",
+                        "get_pictures_from_mongodb_for_single_post",
+                        "get_flair_tags_for_editor",    
+                        "get_posts_multi_filter",
+                        "get_flair_tags_for_filters",
+                        "circle_search_engine",
+                        "get_all_flair_tags",
+                        "report_post",
+                        "get_root_comment",
+                        "support_reject_info_card",
+                        "support_reject_post",
+      ]
+    },
+    {
+      "power_description": "Basic powers to create posts, comments and replies in the circle",
+      "powers_list": [
+                       "create_comment_reply",
+                       "create_comment",
+                       "create_post",
+      ]
+    },
+    {
+      "power_description": " Update posts, comments and replies.",
+      "powers_list": [
+                       "update_comment_post_reply",
+      ]
+    },
+    {
+      "power_description": "Self power. Single Power. To be able to close post their own post.",
+      "powers_list": [
+                        "close_post",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. Access to the specific circle controlboard",
+      "powers_list": [
+                       "specific_circle_controlboard_webpage",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. Update circle description, tags and related circles.",
+      "powers_list": [
+                       "get_specific_circle_details_of_user",      
+                       "update_circle_details",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. Update circle information board and title.",
+      "powers_list": [
+                      "create_title_and_subtitle",
+                      "update_circle_information_board",
+                      "create_information_board",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. Update user roles and powers.",
+      "powers_list": [
+                        "get_circle_users_details",
+                        "update_user_circle_powers",
+                        "find_single_circle_user",
+                        "update_user_role",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. Update roles with flairs.",
+      "powers_list": [
+                        "get_specific_role_flairs",
+                        "update_circle_role_flair_tags",
+                        "create_new_flair_tag",
+                        "delete_flair_tag_from_general_pool",                
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. Create new roles and powers.",
+      "powers_list": [
+                        "get_all_circle_roles",
+                        "create_new_circle_role",
+                        "update_circle_role_powers",
+                        "update_role_order",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. To be able to moderate the reported posts, with the ability to take action on the post",
+      "powers_list": [
+                        "get_reported_posts",
+                        "get_more_reasons_for_report",
+                        "find_reported_post",
+                        "admin_lock_post",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL SECURITY. Single Power. To be able to create role symbol.",
+      "powers_list": [
+                        "create_role_symbol",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL POWER. Single Power. To be able to pin or unpin their own post.",
+      "powers_list": [
+                        "pin_unpin_post",
+      ]
+    },
+    {
+      "power_description": "HIGH LEVEL POWER. Single Power. To be able to set default role for joining.",
+      "powers_list": [
+                        "set_default_role_for_joining",
+      ]
+    },
+            {
+                "power_description": "HIGH LEVEL POWER. Single Power. To be able to leave the circle.",
+                "powers_list": [
+                    "leave_circle",
+                ],
+            },
+  ]
+}

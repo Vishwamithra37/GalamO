@@ -1,0 +1,245 @@
+##########################Divided by powers################################################
+[General Basic User with no admin rights to anything]
+
+[
+ "home_webpage",
+ "get_circle_details",
+ "create_circle",
+ "login_user",
+ "logout_user",
+ "get_user_notifications",
+ "mark_notification_as_read",
+ "get_user_details",
+ "get_posts_multi_filter"
+]
+
+[Circle powers]
+
+    [
+        "leave_circle",
+        "delete_circle",
+        "get_specific_circle_details_of_user",
+        "update_circle_details",
+        "update_comment_post_reply",
+        "create_post",
+        "create_comment_reply",
+        "get_replies",
+        "get_posts",
+        "follow_unfollow_post",
+        "get_information_board_title_and_subtitle",
+        "specific_circle_controlboard_webpage",
+        "create_comment",
+        "create_title_and_subtitle",
+        "update_circle_information_board",
+        "create_information_board",
+        "get_pictures_from_mongodb",
+        "get_information_and_announcement_board",
+        "get_pictures_from_mongodb_for_single_post",
+        "get_flair_tags_for_editor",
+        "get_posts_multi_filter",
+        "get_flair_tags_for_filters",
+        "circle_search_engine",
+        "close_post",
+        "get_circle_users_details",
+        "update_user_circle_powers",
+        "find_single_circle_user",
+        "report_post",
+        "get_reported_posts",
+        "get_more_reasons_for_report",
+        "find_reported_post",
+        "admin_lock_post",
+        "get_all_circle_roles",
+        "create_new_circle_role",
+        "support_reject_info_card",
+        "support_reject_post",
+        "update_circle_role_powers",
+        "update_role_order",
+        "get_all_flair_tags",
+        "get_specific_role_flairs",
+        "update_circle_role_flair_tags",
+        "create_new_flair_tag",
+        "delete_flair_tag_from_general_pool",
+        "update_user_role"
+      ],
+
+#################### 4 types of Users ########################################
+
+[Founder User]####################################################################
+
+Has all the powers mentioned above.
+
+[Company_admin_user]####################################################################
+
+[General Basic User with no admin rights to anything]
+[
+ "home_webpage",
+ "get_circle_details",
+ "create_circle",
+ "login_user",
+ "logout_user",
+ "get_user_notifications",
+ "mark_notification_as_read",
+ "get_user_details",
+ "get_posts_multi_filter"
+]
+
+[Circle powers]
+
+[
+ 'leave_circle',
+ 'delete_circle',
+ 'get_specific_circle_details_of_user',
+ 'update_circle_details',
+ 'update_comment_post_reply',
+ 'support_reject_post',
+ 'create_post',
+ 'create_comment_reply',
+ 'get_replies',
+ 'get_posts',
+ 'follow_unfollow_post',
+ 'get_information_board_title_and_subtitle',
+ 'specific_circle_controlboard_webpage',
+ 'create_comment',
+ 'create_title_and_subtitle',
+ 'update_circle_information_board',
+ 'create_information_board',
+ 'get_pictures_from_mongodb',
+ 'get_information_and_announcement_board',
+ 'support_reject_info_card',
+ 'get_pictures_from_mongodb_for_single_post',
+ 'get_flair_tags_for_editor',
+ 'get_posts_multi_filter',
+ 'get_flair_tags_for_filters',
+ 'circle_search_engine',
+ 'close_post',
+ 'get_circle_users_details'
+ ]
+
+
+[Beta_Tester_user]####################################################################
+[General Basic User with no admin rights to anything]
+[
+ "home_webpage",
+ "get_circle_details",
+ "create_circle",
+ "login_user",
+ "logout_user",
+ "get_user_notifications",
+ "mark_notification_as_read",
+ "get_user_details",
+ "get_posts_multi_filter"
+]
+
+[Circle powers]
+
+[
+ 'leave_circle',
+ 'get_specific_circle_details_of_user',
+ 'update_comment_post_reply',
+ 'support_reject_post',
+ 'create_post',
+ 'create_comment_reply',
+ 'get_replies',
+ 'get_posts',
+ 'follow_unfollow_post',
+ 'get_information_board_title_and_subtitle',
+ 'create_comment',
+ 'get_pictures_from_mongodb',
+ 'get_information_and_announcement_board',
+ 'support_reject_info_card',
+ 'get_pictures_from_mongodb_for_single_post',
+ 'get_flair_tags_for_editor',
+ 'get_posts_multi_filter',
+ 'get_flair_tags_for_filters',
+ 'circle_search_engine',
+ 'close_post',
+ 'get_circle_users_details'
+ ]
+
+[Normal_End_User]####################################################################
+[
+ "home_webpage",
+ "get_circle_details",
+ "create_circle",
+ "login_user",
+ "logout_user",
+ "get_user_notifications",
+ "mark_notification_as_read",
+ "get_user_details",
+ "get_posts_multi_filter"
+]
+
+[Circle powers]
+
+[
+ 'leave_circle',
+ 'get_specific_circle_details_of_user',
+ 'update_comment_post_reply',
+ 'support_reject_post',
+ 'create_post',
+ 'create_comment_reply',
+ 'get_replies',
+ 'get_posts',
+ 'follow_unfollow_post',
+ 'get_information_board_title_and_subtitle',
+ 'create_comment',
+ 'get_pictures_from_mongodb',
+ 'get_information_and_announcement_board',
+ 'support_reject_info_card',
+ 'get_pictures_from_mongodb_for_single_post',
+ 'get_flair_tags_for_editor',
+ 'get_posts_multi_filter',
+ 'get_flair_tags_for_filters',
+ 'circle_search_engine',
+ 'close_post'
+ ]
+
+
+ ######################## Base ROLE ADMIN ALL POWERS ################################
+  [
+        "leave_circle",
+        "delete_circle",
+        "get_specific_circle_details_of_user",
+        "update_circle_details",
+        "update_comment_post_reply",
+        "create_post",
+        "create_comment_reply",
+        "get_replies",
+        "get_posts",
+        "follow_unfollow_post",
+        "get_information_board_title_and_subtitle",
+        "specific_circle_controlboard_webpage",
+        "create_comment",
+        "create_title_and_subtitle",
+        "update_circle_information_board",
+        "create_information_board",
+        "get_pictures_from_mongodb",
+        "get_information_and_announcement_board",
+        "get_pictures_from_mongodb_for_single_post",
+        "get_flair_tags_for_editor",
+        "get_posts_multi_filter",
+        "get_flair_tags_for_filters",
+        "circle_search_engine",
+        "close_post",
+        "get_circle_users_details",
+        "update_user_circle_powers",
+        "find_single_circle_user",
+        "report_post",
+        "get_reported_posts",
+        "get_more_reasons_for_report",
+        "find_reported_post",
+        "admin_lock_post",
+        "get_all_circle_roles",
+        "create_new_circle_role",
+        "support_reject_info_card",
+        "support_reject_post",
+        "update_circle_role_powers",
+        "update_role_order",
+        "get_all_flair_tags",
+        "get_specific_role_flairs",
+        "update_circle_role_flair_tags",
+        "create_new_flair_tag",
+        "delete_flair_tag_from_general_pool",
+        "update_user_role"
+ ]
+ ######################## Base ROLE ADMIN ALL POWERS ################################

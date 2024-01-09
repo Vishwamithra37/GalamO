@@ -1,0 +1,21 @@
+Programming rules.
+
+1) All functions are to be in small letters and a minimum of 4 characters.
+2) All variables are to be in small letters.
+3) All constants are to be in capital letters and in config file.
+4) All Classes are to be in snake_case and a minimum of 4 characters.
+
+The above rules are to be followed strictly.
+
+The following are the rules for the Objects in python.
+
+1) Classes can be used
+2) Use Classes to create a data structure and operations with mongoDB. One class per collection.
+
+To use:
+
+1) Rate Limiting.
+2) CSRF Tokens.
+3) X-Header in mind.
+
+Yes and No in database and True and False in code.

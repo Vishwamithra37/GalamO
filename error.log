@@ -1,0 +1,19 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://192.168.1.33:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 415-654-988
+INFO:main:IP: 127.0.0.1 Accessed Registration Page
+INFO:werkzeug:127.0.0.1 - - [14/Mar/2023 19:34:33] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Mar/2023 19:34:47] "GET /editor HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Mar/2023 19:34:48] "[36mGET /static/styles.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Mar/2023 19:34:48] "[36mGET /static/js/jquery.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Mar/2023 19:34:48] "[36mGET /static/js/myedit.js HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'E:\\2Semmasters\\GTGalam\\GT_Galam_Web\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat

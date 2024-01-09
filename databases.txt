@@ -1,0 +1,64 @@
+BASE64_IMAGES
+CIRCLES
+CIRCLES_INFORMATION_BOARD_CARDS
+CONFIG
+POST_METADATA
+POSTS
+POSTS_ATTACHMENTS_STORE
+SESSION_TOKENS
+USER_DETAILS
+
+
+########### POST METADATA TYPES ############
+
+[
+    "post_followers",
+    "comment_followers",
+    "post_supporters",
+    "post_rejectors",
+    
+]
+
+########### POST TYPES IN POSTS COLLECTION #####################
+{
+    "POST",
+    "COMMENT",
+    "REPLY_COMMENT",
+}
+
+########### POST TYPES IN CIRCLES_INFORMATION_BOARD_CARDS COLLECTION #####################
+{
+    "profile_card",
+    "title_card"
+}
+########### POST TYPES FOR SUPPORT AND REJECT#####################
+
+{
+    "POST",
+    "COMMENT",
+    "REPLY_COMMENT",
+    "profile_card",
+}
+
+
+########### CIRCLE INFORMATION ON ROLES ############################
+
+Example:
+
+{
+    "Roles":{
+            "Admin":{
+                "Description":"Admins can do anything in the circle",
+                "Post_Tags":["announcement","event","poll","discussion","job","project"],
+            },
+            "Moderator":{
+                "Description":"Moderators can do anything in the circle except delete the circle",
+                "Post_Tags":["announcement","event","poll","discussion","job","project"],
+            },
+    },
+    "All_Roles":[
+        "Admin",
+        "Moderator",
+    ]
+
+}

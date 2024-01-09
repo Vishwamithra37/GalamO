@@ -1,0 +1,5 @@
+So, basically,
+The user submits the userdetails through the registration form.
+In the backend, we check and we either approve or disapprove the user.
+
+-> A screen which says the registration is still pendding.
