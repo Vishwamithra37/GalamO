@@ -1,4 +1,5 @@
 # GalamO
+Intention Site: https://galam.in/products/GTSocial
 Open Source version of https://www.galam.in
 
 
