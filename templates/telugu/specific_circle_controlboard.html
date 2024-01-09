@@ -1,0 +1,222 @@
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom_webpacks.css') }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='favicons/site.webmanifest')}}">
+
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}"> -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="{{ url_for('static', filename='js/domPurify.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/feedcard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/floating_dialogue.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/GT_Editor.js') }}"></script>
+    <script type="text/javascript">
+        let DisplayName = "{{ DisplayName }}";
+        var csrf_token = "{{ csrf_token() }}";
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='js/genericalls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/topnavbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/specific_circle_controlboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/specific_circle_moderation.js') }}"></script>
+
+
+
+</head>
+
+<body class="bg-black h-full w-full theme-dark_theme dark:bg-gray-200">
+
+    <section id="Top_Logo_Bar_Section"
+        class="fixed dark:bg-white dark:shadow-lg bg-black w-full h-11 z-50 pr-2 md:pr-0"> <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-center items-center ">
+                <div class="hidden">
+                    <img src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo"
+                        class="h-10 w-10 cursor-pointer p-2 mr-2 hover:bg-gray-700">
+                </div>
+                <a href="/home">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-1 mr-2 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </div>
+                </a>
+
+                <div class="hidden md:flex lg:flex flex-row">
+                    <input type="text" name="SearchBar" id="SearchBar" disabled="true"
+                        class="w-96 h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 border border-red-500 dark:bg-white dark:text-black"
+                        placeholder="Search...">
+                    <div id="SearchBarHolder" class="fixed w-96">
+
+                    </div>
+
+                    <div>
+                        <button
+                            class="text-gray-200 p-2 rounded-md font-semibold hover:text-white ml-1 dark:text-black dark:hover:bg-gray-200"
+                            onclick="new meta_hooks().hook_for_editor()">Post +</button>
+                    </div>
+                </div>
+
+                <a href="/circles">
+                    <div>
+
+                        <img src="{{ url_for('static', filename='images/circles.png') }}" alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-2 ml-2 hover:bg-gray-700 dark:hover:bg-gray-200">
+
+                    </div>
+                </a>
+                <div id="notice_cards">
+                    <span id="notification_count"
+                        class="bg-yellow-700 fixed rounded-full text-white text-xs font-bold p-1 ml-1 hidden ">0</span>
+                    <span id="notification_wrapper">
+                        <img id="notification_image" src="{{ url_for('static', filename='images/nonotification.png') }}"
+                            alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-2 ml-1 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </span>
+                    <div id="Notifications_go_her" class="fixed">
+
+
+                    </div>
+
+                </div>
+                <div id="profile_wrapper" class="ml-1">
+                    <img id="profile_Button" src="{{ url_for('static', filename='images/profile.png') }}" alt="Logo"
+                        class="h-10 w-10 cursor-pointer p-0  hover:bg-gray-700 dark:hover:bg-gray-200 ">
+                    <!-- The drop down needs to align to the left of the parent after removing -->
+                    <div class="fixed">
+                        <div id="profile_Dropdown"
+                            class="hidden flex flex-col bg-black relative right-12 dark:bg-white dark:shadow-lg">
+
+                            <a href="/profile"
+                                class="p-2 hover:border-green-500 border-t-2 border-gray-600 dark:hover:bg-gray-200">
+                                <span id="Profile"
+                                    class="font-semibold text-base text-center dark:text-black text-gray-200 cursor-pointer whitespace-nowrap">My
+                                    Profile</span>
+                            </a>
+                            <span id="logout_Button"
+                                class=" font-semibold text-base dark:hover:bg-gray-200 text-red-600 hover:border-red-700 p-2 border-t-2 border-gray-600 cursor-pointer">Log-out</span>
+                            <div class="flex p-2 border-t-2 border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black flex-row cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                                id="switch_theme" data-current_mode="light">
+                                <img src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo"
+                                    class="h-6 w-6">
+                                Switch Theme
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+
+    <section id="Three_Division_Section" class="w-full flex justify-center h-full pt-12">
+        <div class="w-2/12 1/6-full bg-gray-900 dark:bg-white dark:shadow-lg mr-2 flex flex-col  ">
+            <div class="w-full text-center pb-2 border-b-2 border-b-yellow-500">
+                <span id="Circle_Name_MAINS"
+                    class=" text-white  font-bold border-gray-700  text-xl p-2 pb-3 dark:text-black">{{
+                    DisplayName }}</span>
+            </div>
+            <div id="control_board2" class="flex flex-col ">
+                <span id="moderation_title"
+                    class=" w-full text-center border-b-2 border-b-blue-500 text-white  font-bold border-gray-700 dark:bg-white dark:text-black dark:shadow-lg dark:hover:bg-gray-200 text-lg p-2">Circle
+                    Controls</span>
+                <span id="circle_moderation_user_moderation"
+                    class="w-full p-2 text-center text-white rounded-md bg-gray-900 font-semibold hover:bg-gray-800 cursor-pointer border-b-2 border-gray-700 dark:bg-white dark:text-black dark:shadow-lg dark:hover:bg-gray-200">
+                    User Moderation
+                </span>
+                <span id="circle_moderation_content_moderation"
+                    class="w-full p-2 text-center text-white rounded-md bg-gray-900 hover:bg-gray-800 font-semibold cursor-pointer border-b-2 border-gray-700 dark:bg-white dark:text-black dark:shadow-lg dark:hover:bg-gray-200">
+                    Content Moderation
+                </span>
+                <span id="circle_moderation_statistics"
+                    class="w-full p-2 text-center text-white rounded-md bg-gray-900 hover:bg-gray-800 font-semibold cursor-pointer border-b-2 border-gray-700 dark:bg-white dark:text-black dark:shadow-lg dark:hover:bg-gray-200">
+                    Statistics
+                </span>
+
+                <span id="circle_moderation_flair_management"
+                    class="w-full p-2 text-center text-white rounded-md bg-gray-900 hover:bg-gray-800 font-semibold cursor-pointer border-b-2 border-gray-700 dark:bg-white dark:text-black dark:shadow-lg dark:hover:bg-gray-200">
+                    Flair Management
+                </span>
+
+
+            </div>
+
+
+            <section class=""> <!-- Circle Options Sections-->
+                <div class="w-full h-64 bg-gray-900 mt-4 flex flex-col">
+                    <div class="text-xl font-bold text-yellow-300 text-center w-full border-b-2 border-yellow-200 p-2">
+                        Options </div>
+                    <div id="Circle_Creation_Options"
+                        class="w-full flex flex-row font-bold flex-wrap p-2 justify-between overflow-auto h-96">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <div id="content_board" class=" w-8/12 h-full bg-gray-700 dark:bg-white dark:shadow-lg overflow-y-auto">
+        </div>
+        <div class="w-2/12 h-full bg-gray-900 ml-2 rounded-md p-2 dark:bg-white dark:shadow-lg overflow-y-scroll hidden"
+            id="Preview_Right_Column">
+            <div class="text-center"> <!-- This is the Search Bar with drop down options.-->
+                <div class="font-bold text-lg text-center text-yellow-600 mb-2 border-b-2 border-yellow-300"> <label
+                        id="remo">Information Board</label> </div>
+                <select id="information_board_preview_select" class="appearance-none cursor-pointer w-full p-2 font-bold text-lg text-yellow-500 text-center outline-none rounded-md bg-black hover:bg-gray-900
+                    dark:bg-gray-100 dark:text-black dark:hover:bg-gray-200 dark:shadow-lg"
+                    placeholder="Select category">
+                    <!-- <option disabled selected>Select category</option> -->
+                </select>
+            </div> <!-- End of Search Bar with drop down options. -->
+
+            <div
+                class="w-full flex flex-col justify-between items-center bg-gray-900 mt-2 dark:bg-white dark:shadow-lg">
+                <!-- Announcement Section -->
+                <span id="Information_board_preview_subtitle"
+                    class="font-bold w-full text-xl text-center bg-transparent text-yellow-500 p-2 mb-2 border-b-2 border-yellow-300 shadow-2xl ">Can
+                    be anything</span>
+                <div id="save_preview" class=" w-full mt-2 hidden">
+                    <span>
+                        <button id="save_button"
+                            class="w-full text-white bg-green-500 hover:bg-green-600 p-2 rounded-md hover:text-white">Save
+                            Changes</button>
+                    </span>
+                </div>
+                <div id="information_board_Card_column" class="h-full w-full flex flex-col bg-gray-700 dark:bg-white">
+                    <!-- Stuff which goes -->
+                </div>
+
+            </div> <!-- End of Announcement Section -->
+
+        </div> <!-- End of Right Column -->
+    </section> <!-- End of Three Division Section -->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

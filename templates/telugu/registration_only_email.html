@@ -1,0 +1,159 @@
+<html lang="en" class="dark">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SBQYQ7F7D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8SBQYQ7F7D');
+    </script>
+    <!-- End of Google tag (gtag.js) -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- Jinja way to static/styles.css -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='manifest.json')}}">
+    <!-- <link rel="manifest" href="{{ url_for('static',filename='favicons/site.webmanifest')}}"> -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/CryptoJS.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/genericalls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/floating_dialogue.js') }}"></script>
+    <script async src="{{ url_for('static', filename='js/register_only_email.js') }}"></script>
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+    <script async src="{{ url_for('static', filename='js/t1_registration.js') }}"></script>
+</head>
+
+<body class="theme-dark_theme">
+    <section id="Everything_goes_in_here"
+        class="w-full h-full flex flex-row bg-black md:p-10  justify-center dark:bg-white dark:shadow-lg">
+
+        <!-- <section id="Everything_goes_in_here" class="w-full h-full flex flex-row bg-gradient-to-br from-yellow-600 via-white to-green-500 p-10  justify-center">     -->
+
+
+
+        <section id="Registration_block"
+            class="w-full md:w-5/6 lg:w-5/6 flex flex-row bg-slate-700 rounded-lg justify-between dark:bg-white dark:shadow-lg">
+            <section id="Poster_block" class="hidden md:block w-6/12 h-full bg-blue-500 rounded-lg rounded-r-none">
+                <img src="/static/images/registration.gif" class=" w-full h-full hidden md:block" alt="" loading="lazy">
+
+            </section> <!-- End of GIF -->
+            <div class="text-center hidden md:flex fixed md:static flex-col justify-center text-sm p-0 w-7 h-full pb-1.5  border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                id="splitter" data-current_mode="light">
+                <!-- <img loading="lazy" src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo" class="h-6 w-6"> -->
+                <!-- Switch Theme -->
+                🌙
+                <br>
+                ⎯⎯⎯
+                <br>
+                🌞
+            </div>
+            <section id="Registration_form_block"
+                class="w-full md:w-6/12 h-full bg-gray-900 rounded-lg rounded-l-none flex flex-col dark:bg-white dark:shadow-lg">
+                <div
+                    class="flex flex-row h-24 w-full text-center p-2 pt-3 md:pt-2  font-bold text-2xl justify-center md:text-3xl text-yellow-500 border-b-2 border-b-gray-400">
+                    <!-- <img src="/static/images/Logos/logo.png" alt="" class="h-14 w-14 md:hidden"> -->
+                    <!-- <img src="/static/images/Logos/GT_SOCIAL.png" alt="" class="h-20 w-36 hidden md:block"> -->
+                    <span id="" class="p-4">
+                        Galam Registration
+                    </span>
+                </div>
+                <form action="" class="w-full h-full bg-gray-800 mt-2 p-4 dark:bg-white dark:shadow-lg dark:text-black"
+                    id="registration_form">
+                    <label for="display_name" class="dark:text-black text-white dark:text-black font-bold mt-2">Display
+                        Name: </label>
+                    <input required type="text" required minlength="5" maxlength="14" name="username" id="display_name"
+                        class="w-full h-10 rounded-lg p-2  border-gray-400 bg-gray-900 text-gray-200 outline-none mb-2 dark:bg-white dark:shadow-lg dark:text-black"
+                        placeholder="Enter display name which will be visble to everyone">
+                    <label for="email" class="dark:text-black text-white font-bold mt-2">Email: </label>
+                    <input required type="email" required name="email" id="email"
+                        class="w-full h-10 rounded-lg p-2 mb-2 border-gray-400 bg-gray-900 text-gray-200 outline-none dark:bg-white dark:shadow-lg dark:text-black"
+                        placeholder="Ex: kattppa@gmail.com">
+                    <label for="password" class="dark:text-black text-white font-bold mt-2">Password: </label>
+                    <input required type="password" required name="password" minlength="4" required id="password"
+                        class="w-full h-10 rounded-lg p-2 mb-2 border-gray-400 bg-gray-900 text-gray-200 outline-none dark:bg-white dark:shadow-lg dark:text-black"
+                        placeholder="Enter your password">
+                    <label for="confirm_password" class="dark:text-black text-white font-bold mt-2">Confirm Password:
+                    </label>
+                    <input required type="password" required minlength="4" name="confirm_password" id="confirm_password"
+                        class="w-full h-10   rounded-lg p-2 border-gray-400 bg-gray-900 text-gray-200 outline-none dark:bg-white dark:shadow-lg dark:text-black"
+                        placeholder="Confirm your password">
+                    <div class="w-full flex flex-row p-2  justify-start 0 pl-4 ">
+                        <label for="agreement" id="agreement_label"
+                            class="dark:text-black text-white font-bold border-l-4 pl-2 mt-4  border-yellow-500 hover:border-green-500 text-sm">I
+                            agree to the <a href="/static/terms_and_conditions.txt" class="text-blue-400 "
+                                target="_blank">terms
+                                and
+                                conditions</a> of Galam Technologies Social Media </label>
+                        <input required type="checkbox" required name="agreement" id="agreement"
+                            class="w-5 h-5 ml-2 rounded-lg p-10 mt-4 border-gray-400 bg-gray-900 text-gray-200 outline-none dark:bg-white dark:shadow-lg dark:text-black">
+                    </div>
+
+                    <div> <!-- This is the submit block -->
+                        <button id="submiter"
+                            class="w-full h-10 bg-gray-900 dark:bg-gray-200 dark:shadow-lg dark:text-black dark:hover:bg-gray-300  text-green-400 hover:text-white border-0 border-black rounded-lg mt-5 font-bold hover:bg-green-700">Submit
+                            Application</button>
+                    </div>
+                    <div class="w-full text-center mt-4">
+                        <span class="text-center text-gray-400">
+                            Already have an account? <a href="/login2"
+                                class="text-yellow-500 hover:text-green-500 font-bold">Login</a>
+                        </span>
+                    </div>
+                </form>
+
+
+
+            </section> <!-- End of Registration Form -->
+
+        </section> <!-- End of Registration_block -->
+
+
+
+
+
+    </section> <!-- End of Everything_goes_in_here -->
+</body>
+<script>
+
+    // On clicking splitter remove dark.
+    $("#splitter").click(function () {
+        $("html").toggleClass("dark");
+        $(this).addClass("hidden");
+    });
+    // ON swiping from left, remove hidden class from splitter.
+    $(document).on('touchstart', function (e) {
+        if (e.originalEvent.touches[0].clientX < 80) {
+            $("#splitter").removeClass("hidden");
+        }
+    });
+    $(document).click(function (e) {
+        if (e.target.id != "splitter") {
+            $("#splitter").addClass("hidden");
+        }
+    })
+
+</script>
+
+</html>

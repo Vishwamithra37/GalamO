@@ -1,0 +1,86 @@
+::-webkit-scrollbar-thumb {
+  background-color: #636363;
+}
+
+/* Change the color of the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #2e2f31;
+
+}
+
+/* * {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+} */
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Set the width of the scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 10px;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar-thumb {
+    background-color: #636363;
+  }
+
+  /* Change the color of the scrollbar track */
+  ::-webkit-scrollbar-track {
+    background-color: #2e2f31;
+
+  }
+
+  /* Set the width of the scrollbar */
+  ::-webkit-scrollbar {
+    width: 0.1rem;
+    height: 10px;
+  }
+
+}
+
+
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
+  /* For Firefox */
+  color: rgb(148 163 184);
+}
+
+ul {
+  list-style-type: disc;
+  padding: 0 0 0 1rem;
+}
+
+ol {
+  list-style-type: decimal;
+  padding: 0 0 0 1rem;
+}
+
+.border_custom_gradient {
+  /* .. */
+  border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+}
+
+
+/* styles.css or your custom CSS file */
+.custom_border_for_maper {
+
+  border-width: 1.5px;
+  border-style: solid;
+  border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+  border-image-slice: 1;
+  background-clip: padding-box;
+}
+
+/* https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2?preview.text=%F0%9F%A1%85&preview.text_type=custom */

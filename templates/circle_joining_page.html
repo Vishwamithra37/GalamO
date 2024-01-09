@@ -1,0 +1,236 @@
+<html lang="en" class="dark">
+
+<head>
+    <script>
+    </script>
+    <meta name="og:title" content="Join {{ circle_name }} on Galam!">
+    <meta name="og:description" content="{{ circle_details }}">
+    <meta name="og:url" content="https://www.galam.in/home?circle_name={{ circle_name }}">
+    <meta name="og:image" content="https://www.galam.in/static/images/logo.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SBQYQ7F7D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8SBQYQ7F7D');
+    </script>
+    <!-- End of Google tag (gtag.js) -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ circle_name + " Invitation" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom_webpacks.css') }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='manifest.json')}}">
+
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+
+    </script>
+    <script src="{{ url_for('static', filename='js/floating_dialogue.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/domPurify.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/genericalls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/circle_invitation_page.js') }}"></script>
+</head>
+
+<!-- <body class="bg-black h-full w-full theme-dark_theme "> -->
+
+<body class="bg-black h-full w-full dark:bg-gray-100 transition-colors duration-1000" data-mode="">
+    <!-- <div class="w-3/4 h-full fixed z-10 bg-green-300">
+
+</div>
+<div class="w-3/4 h-full fixed z-20 bg-green-500">
+
+</div> -->
+
+    <section id="Top_Logo_Bar_Section"
+        class="fixed bg-black transition-colors duration-1000  dark:bg-white dark:shadow-lg w-full h-11 z-50 pr-2 md:pr-0">
+        <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-center items-center">
+
+                <a href="/home" class="">
+                    <div>
+                        <img loading="lazy" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-1 mr-2 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </div>
+                </a>
+                <div class="hidden md:flex lg:flex flex-row">
+                    <input type="text" name="SearchBar" id="SearchBar"
+                        class="w-96 h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 SearchBar dark:border dark:border-black dark:bg-white dark:text-black"
+                        placeholder="Search for Circles...">
+                    <div id="SearchBarHolder" class="fixed w-96 SearchBarHolder">
+                    </div>
+                    <div>
+                        <button
+                            class="text-gray-200 p-2 rounded-md font-semibold hover:text-white ml-1 dark:text-black dark:bg-white dark:hover:bg-gray-200"
+                            onclick="new meta_hooks().hook_for_editor()">Search +</button>
+                    </div>
+                </div>
+                <div class="relative md:hidden ml-2 mr-1 pb-1" id="mobile_searcher" onclick="
+                $('#mobile_searchbar').removeClass('hidden');
+                $('#mobile_searchbar').focus();
+                ">
+                    <img loading="lazy" src="/static/images/searcher_glass2.png" alt="" class="h-8 w-8" id="">
+                </div>
+
+                <a href="/circles" class="mr-3 md:mr-0">
+                    <div>
+                        <img loading="lazy" src="{{ url_for('static', filename='images/circles.png') }}" alt="Logo"
+                            class=" h-10 w-10 cursor-pointer p-2 ml-2 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </div>
+                </a>
+                <div id="profile_wrapper_mobile" class="ml-2">
+                    <div class="flex p-2 border-t-2 border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black flex-row cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                        id="switch_theme" data-current_mode="light">
+                        <img loading="lazy" src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo"
+                            class="h-6 w-6">
+                        Switch
+                    </div>
+                </div> <!-- End of Profile Wrapper -->
+            </div> <!-- For mobile-->
+        </div>
+
+        <input type="text" name="SearchBar" id="mobile_searchbar"
+            class="w-full hidden md:hidden absolute h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 SearchBar_mobile"
+            placeholder="Search for Circles..." oninput="
+                    // Replicate the values in the search bar to the main search bar.
+                    $('#SearchBar').val($('#mobile_searchbar').val());
+                //    Trigger input event on the main search bar.
+                    $('#SearchBar').trigger('input');
+                    ">
+        </div> <!-- End of Profile Wrapper -->
+        </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+
+
+    <div id="" class="SearchBarHolder fixed z-10 w-full max-h-96 md:hidden mt-10">
+    </div>
+
+    <section id="Top_Logo_Bar_Section_anonymous"
+        class="hidden fixed bg-black transition-colors duration-1000  dark:bg-white dark:shadow-lg w-full h-11 z-50 pr-2 md:pr-0">
+        <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-evenly items-center ">
+                <a href="/login2">
+                    <div>
+                        <img loading="lazy" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"
+                            class="h-10 w-auto p-1 mr-2">
+                    </div>
+                </a>
+
+                <!-- Login button -->
+                <div>
+                    <a href="/login2">
+                        <button
+                            class="text-gray-200 hover:bg-green-800 bg-green-600  p-2 rounded-md font-semibold hover:text-white ml-1">
+                            Login/Register
+                        </button>
+                    </a>
+                </div>
+                <div class="switch_theme flex text-xl p-1 pb-1.5 border-t-2 rounded-full border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black flex-row cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                    id="" data-current_mode="light">
+                    <!-- <img src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo" class="h-6 w-6"> -->
+                    <!-- Switch Theme -->
+                    🌙/🌞
+
+                </div>
+
+
+            </div> <!-- For mobile-->
+        </div>
+
+        <input type="text" name="SearchBar" id="mobile_searchbar"
+            class="w-full hidden md:hidden absolute h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 SearchBar_mobile"
+            placeholder="Search..." oninput="
+                // Replicate the values in the search bar to the main search bar.
+                $('#SearchBar').val($('#mobile_searchbar').val());
+            //    Trigger input event on the main search bar.
+                $('#SearchBar').trigger('input');
+                ">
+
+        </div> <!-- End of Profile Wrapper -->
+        </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+
+
+
+
+    <!-- This is going to be a neatly centered discord joining like section centered in the middle of the screen. -->
+    <section id="Main_Section_Joining_Card" class="w-full h-full flex justify-center items-center">
+        <div
+            class="bg-gray-700 text-white dark:text-black dark:bg-white dark:eshadow-lg md:w-96 md:h-auto w-full h-auto rounded-md flex flex-col justify-between ">
+            <!-- The title of the circle -->
+            <span class="flex flex-col justify-center items-center w-full border-b-2 border-green-400 mb-2">
+                <h1 class="text-2xl p-2 pb-1 font-semibold text-center ">{{ circle_name }}</h1>
+            </span>
+            <!-- Circle Base64 Image -->
+            <span class="flex flex-col justify-center items-center w-full">
+                <img loading="lazy" src="{{ circle_image_b64 }}" alt="Circle Image" class="w-40 h-40 rounded-lg">
+            </span>
+            <!-- The description of the circle -->
+            <span class="flex flex-col justify-center items-center w-full overflow-y-auto p-2 text-ellipsis max-h-40">
+                <p class="text-base p-2 font-semibold text-center text-clip overflow-y-auto">{{ circle_details }}</p>
+            </span>
+            <!-- A jinja for loop for circle_tags array. -->
+            <span class="flex flex-row justify-center items-center w-full" title="related tags list">
+                {% for tag in circle_tags %}
+                <span class="bg-green-700 p-2 m-1 rounded-md text-sm font-semibold text-white">{{ tag }}</span>
+                {% endfor %}
+            </span>
+            <!-- Another jinja for loop for related_circles array with a different color schema and background. -->
+            <span class="flex flex-row justify-center items-center w-full bg-blend-screen" title="Related circles list">
+                {% for circle in related_circles %}
+                <span class="bg-blue-700 p-2 m-1 rounded-md text-sm font-semibold text-white">{{ circle }}</span>
+                {% endfor %}
+            </span>
+            <!-- Join button -->
+            <a id="Join_Circle_linker" href="/api/v1/circle/join_circle?CircleName={{circle_name}}">
+                <button id="Join_Circle_Button"
+                    class="dark:bg-gray-200  w-full h-auto bg-gray-800 mt-2 rounded-md dark:hover:bg-green-600  hover:bg-green-600 hover:text-white font-bold cursor-pointer">
+                </button></a>
+            <a href="/home?circle_name={{ circle_name }}" target="_blank"
+                class="w-full text-center mt-2 pb-1 text-blue-400  hidden " id="visiter_text">
+                <span class=" ">Give the circle a visit 👁
+                </span>
+            </a>
+        </div>
+
+        <!-- An iframe to show the contents of the circle anonymously. -->
+
+        <!-- 
+        <iframe src="http://localhost/home?circle_name=MyCircle" sandbox="allow-same-origin allow-scripts"
+            class="w-96 h-4/5 ml-2"></iframe> -->
+
+    </section>
+
+
+
+</body>
+
+
+</html>

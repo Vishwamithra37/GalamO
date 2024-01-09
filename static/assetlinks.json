@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "in.galam.www.twa",
+      "sha256_cert_fingerprints": [
+        "D6:45:A5:2F:C0:40:EB:6E:09:35:E3:D1:F0:74:9A:9E:8B:5F:DA:D2:95:9B:1B:A1:8E:B1:53:A1:E2:B0:70:72"
+      ]
+    }
+  }
+]

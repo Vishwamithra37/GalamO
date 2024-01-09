@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galam Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom_webpacks.css') }}"> 
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='favicons/site.webmanifest')}}">
+<body>
+    <section class="w-full h-full bg-black p-2 flex flex-col justify-center items-center">
+        <div class="w-5/12 h-5/6">
+              <img src="/static/images/breaking_computers.gif" alt="" class="w-full h-full rounded-md">
+        </div>
+        <div class="p-4 h-full text-center">
+            <span class="text-3xl  font-bold bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                The page you are looking for does not exist.
+                Stop breaking the internet. <br>
+                With Love, <br>
+                Galam Team ♥ <br>
+                <span class="animate-pulse text-3xl  font-bold bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                We will be redirecting you to home
+                </span>
+                <script>
+                    setTimeout(() => {
+                        window.location.href = "/home";
+                    }, 5000);
+                </script>
+            </span>
+
+        </div>
+
+
+
+
+    </section>
+
+    
+</body>
+</html>

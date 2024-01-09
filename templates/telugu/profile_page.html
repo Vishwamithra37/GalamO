@@ -1,0 +1,234 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom_webpacks.css') }}">
+    <script>
+        var required_verification = "{{ required_verification }}";
+    </script>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='favicons/site.webmanifest')}}">
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/genericalls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/domPurify.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/floating_dialogue.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/topnavbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/feedcard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile_page.js') }}"></script>
+
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+</head>
+
+<body class="bg-black h-full w-full dark:bg-gray-100 transition-colors duration-1000" data-mode="">
+    <!-- <div class="w-3/4 h-full fixed z-10 bg-green-300">
+
+</div>
+<div class="w-3/4 h-full fixed z-20 bg-green-500">
+
+</div> -->
+    <section id="Top_Logo_Bar_Section"
+        class="fixed dark:bg-white dark:shadow-lg bg-black w-full h-11 z-50 pr-2 md:pr-0"> <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-center items-center ">
+                <div class="hidden">
+                    <img loading="lazy" src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo"
+                        class="h-10 w-10 cursor-pointer p-2 mr-2 hover:bg-gray-700">
+                </div>
+                <a href="/home">
+                    <div>
+                        <img loading="lazy" src="{{ url_for('static', filename='images/logo.png') }} " alt="Logo"
+                            class="h-10 w-auto p-1 mr-2 cursor-pointer hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </div>
+                </a>
+
+                <div class="hidden md:flex lg:flex flex-row">
+                    <input type="text" name="SearchBar" id="SearchBar" disabled="true"
+                        class="w-96 h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 border border-red-500 dark:bg-white dark:text-black"
+                        placeholder="Search...">
+                    <div id="SearchBarHolder" class="fixed w-96">
+
+                    </div>
+
+                    <div>
+                        <button
+                            class="text-gray-200 p-2 rounded-md font-semibold hover:text-white ml-1 dark:text-black dark:hover:bg-gray-200"
+                            onclick="new meta_hooks().hook_for_editor()">Post +</button>
+                    </div>
+                </div>
+
+                <a href="/circles">
+                    <div>
+
+                        <img loading="lazy" src="{{ url_for('static', filename='images/circles.png') }}" alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-2 ml-2 hover:bg-gray-700 dark:hover:bg-gray-200">
+
+                    </div>
+                </a>
+                <div id="notice_cards">
+                    <span id="notification_count"
+                        class="bg-yellow-700 fixed rounded-full text-white text-xs font-bold p-1 ml-1 hidden ">0</span>
+                    <span id="notification_wrapper">
+                        <img loading="lazy" id="notification_image"
+                            src="{{ url_for('static', filename='images/nonotification.png') }}" alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-2 ml-1 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </span>
+                    <div id="Notifications_go_her" class="fixed">
+
+
+                    </div>
+
+                </div>
+                <div id="profile_wrapper" class="ml-1">
+                    <img loading="lazy" id="profile_Button" src="{{ url_for('static', filename='images/profile.png') }}"
+                        alt="Logo" class="h-10 w-10 cursor-pointer p-0  hover:bg-gray-700 dark:hover:bg-gray-200 ">
+                    <!-- The drop down needs to align to the left of the parent after removing -->
+                    <div class="fixed">
+                        <div id="profile_Dropdown"
+                            class="hidden flex flex-col bg-black relative right-12 dark:bg-white dark:shadow-lg">
+
+                            <a href="/profile"
+                                class="p-2 hover:border-green-500 border-t-2 border-gray-600 dark:hover:bg-gray-200">
+                                <span id="Profile"
+                                    class="font-semibold text-base text-center dark:text-black text-gray-200 cursor-pointer whitespace-nowrap">My
+                                    Profile</span>
+                            </a>
+                            <span id="logout_Button"
+                                class=" font-semibold text-base dark:hover:bg-gray-200 text-red-600 hover:border-red-700 p-2 border-t-2 border-gray-600 cursor-pointer">Log-out</span>
+                            <div class="flex p-2 border-t-2 border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black flex-row cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                                id="switch_theme" data-current_mode="light">
+                                <img loading="lazy" src="{{ url_for('static', filename='images/themes.png') }}"
+                                    alt="Logo" class="h-6 w-6">
+                                Switch Theme
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+
+    <section class="w-full h-full flex flex-row justify-center pt-12">
+
+
+        <section id="Options_Section"
+            class="hidden flex md:flex fixed md:static bg-gray-900 dark:bg-white h-full flex-col w-11/12 lg:w-2/12 md:w-2/12 mr-2 pt-2 ">
+
+            <span id="my_details"
+                class="text-center font-semibold p-2 border-b-2 w-full text-white hover:text-yellow-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                My Details
+            </span>
+
+            <span class="text-center mt-3 font-bold p-2 border-b-2 w-full text-green-400 border-green-700 bg-gray-800">
+                My Contributions
+            </span>
+            <span id="my_posts"
+                class="text-center font-semibold p-2 border-b-2 w-full text-white hover:text-yellow-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                My Posts
+            </span>
+            <span id="my_supports"
+                class="hidden text-center font-semibold p-2 border-b-2 w-full text-white hover:text-yellow-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                Supports
+            </span>
+            <span id="my_rejects"
+                class="hidden text-center font-semibold p-2 border-b-2 w-full text-white hover:text-yellow-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                Rejects
+            </span>
+            <span id="my_comments"
+                class="text-center font-semibold p-2 border-b-2 w-full text-white hover:text-yellow-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                Comments
+            </span>
+            <span id="comment_replies"
+                class="text-center font-semibold p-2 border-b-2 w-full text-white hover:text-yellow-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                Comment Replies
+            </span>
+
+            <span id="Verification_wrapper"
+                class="text-center mt-3 font-bold p-2 border-b-2 w-full text-green-400 border-green-700 border-yellow-500 bg-gray-800">
+                Verification
+            </span>
+            <span id="Complete_Verification"
+                onclick="new profile_page_verification().reset_startup_screen_and_redirect_to_home() "
+                class="text-center font-semibold p-2 border-b-2 w-full text-lime-400 hover:text-lime-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                Complete Verification
+            </span>
+
+
+            <span class="text-center mt-3 font-bold p-2 border-b-2 w-full text-red-400 border-red-500 bg-gray-800">
+                Dangerous
+            </span>
+            <span id="reset_password" onclick="new profile_page_reset_password().security_popup()"
+                class="text-center font-semibold p-2 border-b-2 w-full text-red-400 hover:text-red-500 border-gray-700 hover:border-gray-600 bg-gray-800 cursor-pointer">
+                Reset Password
+            </span>
+        </section>
+        <section id="Profile_Section" class="bg-gray-800 h-full w-full md:w-6/12 overflow-y-auto dark:bg-white">
+        </section>
+
+        <section id="Info_Section"
+            class="hidden md:block fixed md:static bg-gray-900 dark:bg-white h-full w-11/12 lg:w-2/12 md:w-2/12 ml-2 overflow-y-auto">
+            <div
+                class="p-2 border-b-2 w-full text-white border-transparent border-2 bg-gray-800 dark:bg-gray-100 dark:text-black">
+                <span class="text-start font-semibold dark:text-black text-gray-300">
+                    Profile Details
+                </span> <br>
+                <span class="text-start font-semibold dark:text-gray-600 text-gray-400">
+                    Your details will be displayed here. We prioritize the details of the user
+                    as the next most precious thing after the user's privacy.
+                    You can also see your posts, comments and their replies by clicking
+                    on the options on the left column.
+                    Have a great day! 🙂
+                </span>
+            </div>
+        </section>
+
+    </section>
+
+    <section id="Bottom_Logo_Bar_Section" class="fixed bottom-0  bg-black w-full h-11 md:hidden z-40">
+        <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-center items-center pl-4 pr-4 pb-2">
+
+                <div
+                    onclick="new profile_page_meta_functions().mobile_drag_left_menu_into_view('#Options_Section','left')">
+                    <span class="text-3xl text-yellow-400 hover:text-yellow-600"> ☰</span>
+                </div>
+
+                <div
+                    onclick="new profile_page_meta_functions().mobile_drag_left_menu_into_view('#Info_Section','right');">
+                    <span class="text-3xl text-yellow-400 hover:text-yellow-600"> ☰</span>
+                </div>
+            </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+    <script>
+
+        if (required_verification != 'Yes') {
+
+            $('#Verification_wrapper').text('Verified');
+            $('#Complete_Verification').addClass('hidden');
+
+        }
+    </script>
+</body>
+
+
+</html>

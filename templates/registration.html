@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- Jinja way to static/styles.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='favicons/site.webmanifest')}}">
+    
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+    
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                    console.log(csrf_token);
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+     <script src="{{ url_for('static', filename='js/m1_registration.js') }}"></script>
+
+
+
+
+</head>
+
+<body>
+
+<section id="Everything_goes_in_here" class="w-full h-full flex flex-col bg-gradient-to-br from-pink-400 to-blue-500">    
+
+<section id="Top_Logo_Bar">
+    <div class="bg-black w-full h-20">
+
+    </div>
+</section> <!-- End of Top_Logo_Bar -->
+
+<section id="Registration_block" class="w-full flex justify-center mt-2">
+    <div class="w-2/6 flex flex-col bg-slate-700 rounded-lg p-10 pt-1 mb-2"> 
+
+            <div class="w-full flex justify-center items-center">
+                <h1 id="Title_head" class="text-2xl text-white pt-3 pb-2 border-b-2 border-blue-300">New User Registration</h1>
+            </div>
+                <form id="Basic_User_Registration" class="">          
+                   <!-- Add in jinja csrf code. -->
+                   {{ form.csrf_token }}
+                    <div class="w-full flex flex-col p-1">
+                    <div class="w-full flex flex-col p-1">
+                        <label for="email" class="text-white">Email</label>
+                        <input type="email" required name="email" id="email" class="w-full outline-none h-10 rounded-lg p-2" placeholder="Email">
+                    </div>
+                    <div class="w-full flex flex-col p-1">
+                        <label for="password" class="text-white">Password</label>
+                        <input type="password" required minlength="7"   name="password" id="password" class="w-full outline-none h-10 rounded-lg p-2" placeholder="Password">
+                    </div>
+                    <div class="w-full flex flex-col p-1">
+                        <label for="confirm_password" class="text-white">Confirm Password</label>
+                        <input type="password" required name="confirm_password" id="confirm_password" class="w-full outline-none h-10 rounded-lg p-2" placeholder="Confirm Password">
+                    </div>
+                    <div class="w-full flex flex-row p-1 mt-1">
+                        <input type="checkbox" required name="terms" id="terms" class="w-5 h-5 mr-2 mt-1">
+                        <label for="terms" id="terms"  class="text-white">I agree to the terms and conditions</label>
+                    </div>
+                
+                    <div class="w-full flex flex-col p-1 mt-2">
+                        <input type="submit"  class="w-full h-10 rounded-lg bg-violet-700 hover:bg-violet-800 text-white cursor-pointer text-center p-2"></div>
+                    </div>
+                </form>
+
+            </div>
+        
+    </div>
+</section> <!-- End of Registration_block -->
+
+
+</section> <!-- End of Everything_goes_in_here -->
+</body>
+</html>

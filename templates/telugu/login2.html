@@ -1,0 +1,184 @@
+<html lang="en" class="dark">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SBQYQ7F7D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8SBQYQ7F7D');
+    </script>
+    <!-- End of Google tag (gtag.js) -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="manifest" href="/static/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Jinja way to static/styles.css -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='manifest.json')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom_webpacks.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/CryptoJS.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/genericalls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/floating_dialogue.js') }}"></script>
+    <script type="text/javascript">
+
+        var login_form_url = "{{ url_for('login_user')}}";
+        var csrf_token = "{{ csrf_token() }}";
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/m1_login.js') }}"></script>
+</head>
+
+<body class="theme-dark_theme">
+
+    <section id="Everything_goes_in_here"
+        class="w-full h-full flex flex-row  bg-black md:p-10  justify-center dark:bg-white dark:shadow-lg">
+
+        <!-- <section id="Everything_goes_in_here" class="w-full h-full flex flex-row bg-gradient-to-br from-yellow-600 via-white to-green-500 p-10  justify-center">     -->
+
+
+
+        <section id="Registration_block"
+            class="w-full md:w-5/6 lg:w-5/6 flex flex-row bg-black rounded-lg justify-between dark:bg-white dark:shadow-lg">
+            <section id="Poster_block" class="hidden md:block w-6/12 h-full bg-blue-500 rounded-lg rounded-r-none">
+                <img class="w-full h-full hidden md:block" src="/static/images/registration.gif" alt="">
+
+            </section> <!-- End of GIF -->
+
+            <div class="text-center hidden md:flex fixed md:static flex-col justify-center text-sm p-0 w-7 h-full pb-1.5  border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                id="splitter" data-current_mode="light">
+                <!-- <img loading="lazy" src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo" class="h-6 w-6"> -->
+                <!-- Switch Theme -->
+                🌙
+                <br>
+                ⎯⎯⎯
+                <br>
+                🌞
+            </div>
+
+
+            <section id="Registration_form_block"
+                class="w-full md:w-6/12 h-full bg-gray-900 rounded-lg rounded-l-none flex flex-col dark:bg-white dark:shadow-lg">
+
+
+                <span id=""
+                    class="w-full justify-center flex flex-row text-center p-2 font-bold text-3xl text-yellow-500 border-b-2 border-b-gray-400">
+                    Galam - Login
+
+                    </div>
+                    <!-- <span class="text-sm text-center "> -->
+                    <!-- Enter the new age of connectivity -->
+                    <!-- </span> -->
+                </span>
+                <form id="login_form" method="post" action="{{ url_for('login_user')}}"
+                    class="w-full h-full bg-gray-800 p-2 md:p-10 pt-20  mt-2 dark:bg-white dark:shadow-lg"
+                    id="login_form2">
+
+
+                    <label for="email" class="text-white dark:text-black font-bold mt-2  ">Email: </label>
+                    <input required type="email" name="UserEmail" id="email"
+                        class="w-full text-white dark:text-black h-10 mb-2 rounded-lg border-0 dark:border p-2 outline-none border-gray-400 bg-black dark:bg-white"
+                        placeholder="Ex: paladugu@gmail.com">
+                    <label for="password" class="text-white dark:text-black mt-4 font-bold">Password: </label>
+                    <input required type="password" name="UserPassword" id="password"
+                        class="w-full text-white dark:text-black h-10 rounded-lg dark:border border-0 outline-none p-2 border-gray-400 bg-black dark:bg-white"
+                        placeholder="XXXXXXXX">
+                    <div id="submit_button"
+                        class="text-center  p-2 cursor-pointer w-full h-10 bg-gray-900 dark:bg-gray-200 dark:shadow-xl dark:hover:bg-gray-300 rounded-lg mt-5 text-green-500 font-bold hover:bg-green-700 hover:text-white dark:text-black">
+                        Login to your account</div>
+                    <!-- TRY CATCH JINJA. If oauth["google"] is 1 then show the logo else dont andd oauth ["github, then show github"] -->
+                    {% if oauth["google"] == 1 or oauth["github"] == 1 or oauth["facebook"] == 1 %}
+                    <!-- OAUTH LOGO SECTION -->
+                    <div class="text-gray-400 text-center font-bold mt-5">
+                        Or Login/Register with
+                    </div>
+                    <div class="border-0 border-blue-300 p-2  m-2 flex justify-center text-center items-center">
+                        {% if oauth["facebook"] == 1 %}
+                        <img src="/static/Oauthimgs/Facebook-Logo.png" alt=""
+                            class="w-14 h-14 rounded-full bg-gray-900 m-2 mr-6 p-1">
+                        {% endif %}
+                        {% if oauth["google"] == 1 %}
+                        <a href="/login2/googlelogin">
+                            <img src="/static/Oauthimgs/google_logo.png" alt=""
+                                class="w-14 h-14 rounded-full bg-gray-900 m-2 mr-6">
+                        </a>
+                        {% endif %}
+
+                        {% if oauth["github"] == 1 %}
+                        <a href="/login2/githublogin"> <img src="/static/Oauthimgs/black_logo_github.jpg" alt=""
+                                class="w-14 h-14 rounded-full bg-gray-900"></a>
+                        {% endif %}
+                    </div>
+                    <!-- END OF OAUTH LOGO SECTION -->
+                    {% endif %}
+
+
+
+
+
+
+
+                </form>
+
+                <div class="text-center w-full m-0 flex flex-col pb-2">
+
+                    <span id="forgot_password"
+                        class="text-gray-400 font-bold hover:text-yellow-600 cursor-pointer mb-2 ">
+                        Forgot Password?
+                    </span>
+                    <span>
+                        <span class="text-gray-500 ">
+                            Don't have an account? </span>
+                        <a href="/register2" class="text-yellow-500 font-bold hover:text-yellow-600">Register
+                            here</a>
+                    </span>
+                </div>
+
+            </section> <!-- End of Registration Form -->
+
+
+
+        </section> <!-- End of Registration_block -->
+
+
+
+    </section> <!-- End of Everything_goes_in_here -->
+</body>
+<script src="{{ url_for('static', filename='js/service_worker_registration.js') }}"></script>
+<script>
+    // On clicking splitter remove dark.
+    $("#splitter").click(function () {
+        $("html").toggleClass("dark");
+        $(this).addClass("hidden");
+    });
+    // ON swiping from left, remove hidden class from splitter.
+    $(document).on('touchstart', function (e) {
+        if (e.originalEvent.touches[0].clientX < 80) {
+            $("#splitter").removeClass("hidden");
+        }
+    });
+    $(document).click(function (e) {
+        if (e.target.id != "splitter") {
+            $("#splitter").addClass("hidden");
+        }
+    })
+</script>
+
+</html>

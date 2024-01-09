@@ -1,0 +1,115 @@
+<html lang="en" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- Jinja way to static/styles.css -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='favicons/site.webmanifest')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/CryptoJS.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/genericalls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/floating_dialogue.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/t1_registration.js') }}"></script>
+</head>
+
+<body class="theme-dark_theme">
+    <section id="Everything_goes_in_here" class="w-full h-full flex flex-row  bg-gray-600 md:p-10  justify-center">
+
+        <!-- <section id="Everything_goes_in_here" class="w-full h-full flex flex-row bg-gradient-to-br from-yellow-600 via-white to-green-500 p-10  justify-center">     -->
+
+
+
+        <section id="Registration_block"
+            class="w-full md:w-5/6 lg:w-5/6 flex flex-row bg-slate-700 rounded-lg justify-between">
+            <section id="Poster_block" class="hidden md:block w-6/12 h-full bg-blue-500 rounded-lg rounded-r-none">
+                <img src="/static/images/registration.gif" class=" w-full h-full hidden md:block" alt="" loading="lazy">
+
+            </section> <!-- End of GIF -->
+            <section id="Registration_form_block"
+                class="w-full md:w-6/12 h-full bg-gray-800 rounded-lg rounded-l-none flex flex-col">
+                <div
+                    class="flex flex-row h-24 w-full text-center p-2 pt-3 md:pt-2  font-bold text-2xl justify-start md:text-3xl text-yellow-500 border-b-2 border-b-gray-400">
+                    <img src="/static/images/Logos/logo.png" alt="" class="h-14 w-14 md:hidden">
+                    <img src="/static/images/Logos/GT_SOCIAL.png" alt="" class="h-20 w-36 hidden md:block">
+                    <span class="p-4">
+                        New User Registration
+                    </span>
+                </div>
+                <form action="" class="w-full h-full bg-gray-700 mt-2 p-4" id="registration_form">
+                    <label for="" class="text-white font-bold mt-2">Display Name: </label>
+                    <input type="text" required minlength="5" maxlength="14" name="username" id="display_name"
+                        class="w-full h-10 rounded-lg p-2 border-gray-400 bg-gray-900 text-gray-200 outline-none"
+                        placeholder="Enter display name which will be visble to everyone">
+                    <label for="" class="text-white font-bold mt-2">Email: </label>
+                    <input type="email" required name="email" id="email"
+                        class="w-full h-10 rounded-lg p-2 border-gray-400 bg-gray-900 text-gray-200 outline-none"
+                        placeholder="Enter your email">
+                    <label for="" class="text-white font-bold mt-2">Aadhar Number: </label>
+                    <input type="number" required max="999999999999" min="100000000001" maxlength="12" minlength="12"
+                        name="Aadhar" id="aadhar"
+                        class="w-full h-10 rounded-lg p-2 border-gray-400 bg-gray-900 text-gray-200 outline-none"
+                        placeholder="Enter your aadhar number">
+                    <label for="" class="text-white font-bold mt-2">VoterID Number (EPIC): <span
+                            class="text-gray-400">(Optional-Required for voting) </span></label>
+                    <input type="text" name="VoterID" pattern="[A-Z]{3}[0-9]{7}" id="VoterID" maxlength="10"
+                        minlength="10"
+                        class="w-full h-10 rounded-lg p-2 border-gray-400 bg-gray-900 text-gray-200 outline-none"
+                        placeholder="Enter your aadhar number">
+                    <label for="" class="text-white font-bold mt-2">Password: </label>
+                    <input type="password" required name="password" minlength="4" required id="password"
+                        class="w-full h-10 rounded-lg p-2 border-gray-400 bg-gray-900 text-gray-200 outline-none"
+                        placeholder="Enter your password">
+                    <label for="" class="text-white font-bold mt-2">Confirm Password: </label>
+                    <input type="password" required minlength="4" name="confirm_password" id="confirm_password"
+                        class="w-full h-10 rounded-lg p-2 border-gray-400 bg-gray-900 text-gray-200 outline-none"
+                        placeholder="Confirm your password">
+                    <div class="w-full flex flex-row p-2  justify-start 0 pl-4 ">
+                        <label for="agreement" id="agreement_label"
+                            class="text-white font-bold border-l-4 pl-2 border-yellow-500 hover:border-green-500 text-sm">I
+                            agree to the <a href="">terms and conditions</a> of Galam Technologies Social Media </label>
+                        <input type="checkbox" required name="agreement" id="agreement"
+                            class="w-5 h-5 ml-2 rounded-lg p-10 border-gray-400 bg-gray-900 text-gray-200 outline-none">
+
+                    </div>
+
+                    <div> <!-- This is the submit block -->
+                        <button id="submiter"
+                            class="w-full h-10 bg-gray-900 text-green-400 hover:text-white border-0 border-black rounded-lg mt-2 font-bold hover:bg-green-700">Submit
+                            Application</button>
+                    </div>
+                </form>
+
+            </section> <!-- End of Registration Form -->
+
+        </section> <!-- End of Registration_block -->
+
+
+
+
+
+    </section> <!-- End of Everything_goes_in_here -->
+</body>
+
+</html>

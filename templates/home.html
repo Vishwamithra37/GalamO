@@ -1,0 +1,490 @@
+<html lang="en" class="dark">
+
+<head>
+    <script>
+    </script>
+    <meta name="og:title" content="GTSocial">
+    <meta name="og:description" content="The true voice of the people :) Galam!">
+    <meta name="og:url" content="https://www.galam.in">
+    <meta name="og:image" content="https://www.galam.in/static/images/logo.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SBQYQ7F7D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8SBQYQ7F7D');
+    </script>
+    <!-- End of Google tag (gtag.js) -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom_webpacks.css') }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='manifest.json')}}">
+
+    <script>
+        var user_powers_list = [];
+        {% if "voter_id_verification" in user_powers %}
+        user_powers_list.push("voter_id_verification");
+        {% endif %}
+        {% if "aadhar_verification" in user_powers %}
+        user_powers_list.push("aadhar_verification");
+        {% endif %}
+        var startup_screen_enabled = {% if startup_screen_enabled %}true{% else %} false{% endif %};
+        var optional_select_circle = {% if optional_select_circle %}'{{ optional_select_circle }}'{% else %} false{% endif %};
+        var isAnonymous = false;
+        {% if isAnonymous == "Yes" %}
+        isAnonymous = true;
+        {% endif %}
+
+        // On ready function to load the hide the anon bar if isAnonymous is false (Add class hidden).
+    </script>
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='js/floating_dialogue.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/domPurify.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/GT_Editor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/feedcard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/genericalls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/home_script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/topnavbar.js') }}"></script>
+    <script async src="{{ url_for('static', filename='js/service_worker_registration.js') }}"></script>
+</head>
+
+<!-- <body class="bg-black h-full w-full theme-dark_theme "> -->
+
+<body class="bg-black h-full w-full dark:bg-gray-100 transition-colors duration-1000" data-mode="">
+    <!-- <div class="w-3/4 h-full fixed z-10 bg-green-300">
+
+</div>
+<div class="w-3/4 h-full fixed z-20 bg-green-500">
+
+</div> -->
+    <section id="Top_Logo_Bar_Section"
+        class="fixed bg-black transition-colors duration-1000  dark:bg-white dark:shadow-lg w-full h-11 z-50 pr-2 md:pr-0">
+        <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-center items-center">
+
+                <a href="/home" class="">
+                    <div>
+                        <img loading="lazy" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-1 mr-2 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </div>
+                </a>
+
+                <div class="hidden md:flex lg:flex flex-row">
+                    <input type="text" name="SearchBar" id="SearchBar"
+                        class="w-96 h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 SearchBar dark:border dark:border-black dark:bg-white dark:text-black"
+                        placeholder="Search...">
+                    <div id="SearchBarHolder" class="fixed w-96 SearchBarHolder">
+                    </div>
+                    <div>
+                        <button
+                            class="text-gray-200 p-2 rounded-md font-semibold hover:text-white ml-1 dark:text-black dark:bg-white dark:hover:bg-gray-200"
+                            onclick="new meta_hooks().hook_for_editor()">Post +</button>
+                    </div>
+                </div>
+
+                <select id="Main_Circle_In_Focus_mobile" class="md:hidden w-4/12 cursor-pointer mr-auto float-left  p-2 font-bold text-lg text-yellow-500 text-center outline-none rounded-md bg-black hover:bg-gray-900 
+                    dark:text-black dark:bg-gray-100 dark:hover:bg-gray-200" placeholder="Select a country" onchange="
+                    // Change in #Main_Circle_In_Focus
+                    $('#Main_Circle_In_Focus').val($('#Main_Circle_In_Focus_mobile').val());
+                    $('#Main_Circle_In_Focus').change();
+                    ">
+
+                    <!-- A jinja loop for UserCircles array creating options. -->
+                    {% for circle in User_Circles %}
+                    <option>{{ circle }}</option>
+                    {% endfor %}
+                    <!-- <option>India</option> -->
+                </select>
+
+
+
+
+
+
+
+                <div class="relative md:hidden ml-2 mr-1 pb-1" id="mobile_searcher" onclick="
+                $('#mobile_searchbar').removeClass('hidden');
+                $('#mobile_searchbar').focus();
+                // alert('hello');
+                ">
+                    <img loading="lazy" src="/static/images/searcher_glass2.png" alt="" class="h-8 w-8" id="">
+                </div>
+
+                <a href="/circles" class="mr-3 md:mr-0">
+                    <div>
+                        <img loading="lazy" src="{{ url_for('static', filename='images/circles.png') }}" alt="Logo"
+                            class=" h-10 w-10 cursor-pointer p-2 ml-2 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </div>
+                </a>
+
+
+
+                <div id="notice_cards" class="relative  mr-3 md:mr-0">
+                    <span id="notification_count"
+                        class="bg-yellow-700 fixed rounded-full text-white text-xs font-bold p-1 ml-1 hidden">0</span>
+                    <span id="notification_wrapper">
+                        <img loading="lazy" id="notification_image"
+                            src="{{ url_for('static', filename='images/nonotification.png') }}" alt="Logo"
+                            class="h-10 w-10 cursor-pointer p-2 ml-1 hover:bg-gray-700 dark:hover:bg-gray-200">
+                    </span>
+                    <div id="Notifications_go_her" class="absolute" style="left: 30%; transform: translateX(-30%);">
+                    </div>
+                </div><!-- End of Notification Wrapper -->
+
+
+                <div id="profile_wrapper_mobile" class="">
+                    <img loading="lazy" id="profile_Button_mobile"
+                        src="{{ url_for('static', filename='images/profile.png') }}" alt="Logo"
+                        class="h-10 w-10 cursor-pointer pl-1  hover:bg-gray-700 dark:hover:bg-gray-200">
+                    <!-- The drop down needs to align to the left of the parent after removing -->
+                    <div class="fixed">
+                        <div id="profile_Dropdown_mobile"
+                            class="hidden flex flex-col bg-black relative right-12 dark:bg-white dark:shadow-lg">
+
+                            <a href="/profile"
+                                class="p-2 hover:border-green-500 border-t-2 border-gray-600 dark:hover:bg-gray-200">
+                                <span id="Profile"
+                                    class="font-semibold text-base text-center text-gray-200 cursor-pointer whitespace-nowrap dark:text-black dark:shadow-md">My
+                                    Profile</span>
+                            </a>
+                            <span id="logout_Button" onclick=""
+                                class="dark:hover:bg-gray-200 font-semibold text-base text-red-600 hover:border-red-700 p-2 border-t-2 border-gray-600 cursor-pointer">Log-out</span>
+                            <div class="flex p-2 border-t-2 border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black flex-row cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                                id="switch_theme" data-current_mode="light">
+                                <img loading="lazy" src="{{ url_for('static', filename='images/themes.png') }}"
+                                    alt="Logo" class="h-6 w-6">
+                                Switch Theme
+                            </div>
+                        </div>
+
+                    </div>
+                </div> <!-- End of Profile Wrapper -->
+
+
+            </div> <!-- For mobile-->
+        </div>
+
+        <input type="text" name="SearchBar" id="mobile_searchbar"
+            class="w-full hidden md:hidden absolute h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 SearchBar_mobile"
+            placeholder="Search..." oninput="
+                    // Replicate the values in the search bar to the main search bar.
+                    $('#SearchBar').val($('#mobile_searchbar').val());
+                //    Trigger input event on the main search bar.
+                    $('#SearchBar').trigger('input');
+                    ">
+
+        </div> <!-- End of Profile Wrapper -->
+        </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+
+
+    <div id="" class="SearchBarHolder fixed z-10 w-full max-h-96 md:hidden mt-10">
+    </div>
+
+    <section id="Top_Logo_Bar_Section_anonymous"
+        class="hidden fixed bg-black transition-colors duration-1000  dark:bg-white dark:shadow-lg w-full h-11 z-50 pr-2 md:pr-0">
+        <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-evenly items-center ">
+                <a href="/login2">
+                    <div>
+                        <img loading="lazy" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"
+                            class="h-10 w-auto p-1 mr-2">
+                    </div>
+                </a>
+
+                <!-- Login button -->
+                <div>
+                    <a href="/login2">
+                        <button
+                            class="text-gray-200 hover:bg-green-800 bg-green-600  p-2 rounded-md font-semibold hover:text-white ml-1">
+                            Login/Register
+                        </button>
+                    </a>
+                </div>
+                <div class="switch_theme flex text-xl p-1 pb-1.5 border-t-2 rounded-full border-gray-600 text-black bg-white hover:bg-gray-200 hover:border-white dark:hover:border-black flex-row cursor-pointer font-semibold dark:hover:bg-gray-900 dark:bg-black dark:text-white"
+                    id="" data-current_mode="light">
+                    <!-- <img src="{{ url_for('static', filename='images/themes.png') }}" alt="Logo" class="h-6 w-6"> -->
+                    <!-- Switch Theme -->
+                    🌙/🌞
+
+                </div>
+
+
+            </div> <!-- For mobile-->
+        </div>
+
+        <input type="text" name="SearchBar" id="mobile_searchbar"
+            class="w-full hidden md:hidden absolute h-10 rounded-md p-2 outline-none bg-gray-800 text-gray-200 SearchBar_mobile"
+            placeholder="Search..." oninput="
+                // Replicate the values in the search bar to the main search bar.
+                $('#SearchBar').val($('#mobile_searchbar').val());
+            //    Trigger input event on the main search bar.
+                $('#SearchBar').trigger('input');
+                ">
+
+        </div> <!-- End of Profile Wrapper -->
+        </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+
+
+
+    <section id="Bottom_Logo_Bar_Section"
+        class="fixed bottom-0 dark:bg-white transition-colors duration-1000 dark:border-t-2 dark:border-gray-200 bg-black w-full h-11 md:hidden z-40">
+        <!-- Top_Logo_Bar -->
+        <div class="">
+            <div class="w-full h-full flex justify-between md:justify-center items-center pl-4 pr-4 pb-2">
+
+                <div onclick="new meta_hooks().mobile_drag_left_menu_into_view('#Left_Column','left')">
+                    <span class="text-3xl text-yellow-400 hover:text-yellow-600"> ☰</span>
+                </div>
+
+                <div onclick="new meta_hooks().to_redirect_and_click_on_asker()"
+                    class="h-14 w-14 bg-black dark:bg-white mb-4 rounded-full flex flex-col">
+                    <span class="text-4xl pl-3.5 pr-3.5 text-yellow-500">⊕</span>
+                    <span class="text-sm text-yellow-500 whitespace-nowrap">add post</span>
+                </div>
+
+                <div onclick="new meta_hooks().mobile_drag_left_menu_into_view('#Right_Column','right');">
+                    <span class="text-3xl text-yellow-400 hover:text-yellow-600"> ☰</span>
+                </div>
+
+
+            </div>
+        </div>
+    </section> <!-- End of Top_Logo_Bar -->
+
+
+    <section id="Three_Division_Section" class="w-full flex justify-center h-full pt-12 md:pb-0">
+        <div class="hidden fixed w-11/12 overflow-y-auto bg-gray-900 z-10 md:block lg:block  lg:w-2/12  md:w-2/12 h-full md:bg-gray-900 mr-2 rounded-md p-2 md:static dark:bg-white dark:shadow-lg "
+            id="Left_Column">
+            <div class="text-center"> <!-- This is the Search Bar with drop down options.-->
+                <div class="font-bold text-lg text-center text-yellow-600 mb-2 border-b-2 border-yellow-300">Circle
+                    Board</div>
+                <select id="Main_Circle_In_Focus" class="hidden md:block appearance-none cursor-pointer w-full p-2 font-bold text-lg text-yellow-500 text-center outline-none rounded-md bg-black hover:bg-gray-900
+                    dark:text-black dark:bg-gray-100 dark:hover:bg-gray-200" placeholder="Select a country">
+
+                    <!-- A jinja loop for UserCircles array creating options. -->
+                    {% for circle in User_Circles %}
+                    <option>{{ circle }}</option>
+                    {% endfor %}
+
+                    <!-- <option>India</option> -->
+                </select>
+            </div> <!-- End of Search Bar with drop down options. -->
+
+            <!-- <div class="font-bold w-full bg-black text-xl text-center mt-2 text-yellow-600 p-2 hover:text-yellow-500 cursor-pointer border-2 border-gray-600 shadow-2xl">Announcements ▤</div> -->
+            <div class="w-full bg-black text-gray-400 font-semibold p-2 mt-2 text-center
+                dark:text-black dark:bg-white dark:shadow-lg dark:hover:bg-gray-200 overflow-y-scroll max-h-20"
+                id="homepage_circle_description">
+
+
+            </div>
+
+            <div class="w-full bg-black dark:bg-white dark:shadow-lg flex flex-row justify-evenly p-2 "
+                id="ultra_basic_statistics">
+
+                <span class="text-blue-500 font-semibold" id="ultra_basic_statistics_lifetime_user_traffic"
+                    title="Lifetime Number of User Traffic">
+                    <!-- ⬤: 5500 -->
+                </span>
+                <span class="text-yellow-500 font-semibold" id="ultra_basic_statistics_current_users"
+                    title="Current Number of Users in Circle">
+                    <!-- ⬤: 5500 -->
+                </span>
+
+            </div>
+
+
+
+            <div class="w-full bg-black flex flex-col h-72 mt-2
+            dark:bg-white dark:shadow-lg">
+                <span
+                    class="w-full text-blue-500 border-b-2 border-gray-700 text-center p-1 font-bold dark:border-b-0 dark:shadow-md">
+                    Filter Posts By
+                    Tags
+                </span>
+                <div id="Filter_Box"
+                    class="w-full h-full overflow-y-auto flex flex-row p-2 flex-wrap justify-normal content-start ">
+                </div>
+            </div> <!-- Filter Box which filters by tags-->
+
+            <section id="mapper"
+                class="w-full dark:shadow-lg relative  mt-2  cursor-pointer border-2 border-gray-200 text-white font-semibold text-center custom_border_for_maper  ">
+
+                <!-- This is the section where a user get's to see circles in his/her location if they enable location.-->
+                <!-- Click to view the circles in your location. -->
+                <img src="/static/images/maper.jpeg" class="w-full h-20" alt=""
+                    title="Click to view circles in the current location ">
+                <!-- <div class="bg-yellow-500 rounded-b-full animate-spin absolute h-5 w-3 "></div> -->
+            </section>
+
+            <!-- An invite button  -->
+            <div class="w-full bg-black m text-white dark:text-black hover:text-yellow-500 cursor-pointer mt-2 shadow-md dark:hover:bg-gray-200 dark:bg-white text-center p-2  dark:shadow-lg dark:text-bleck font-semibold"
+                onclick="new home_script_meta_function_calls().copy_invitation_link()">
+                copy invite to circle 📋
+            </div>
+
+
+
+            <!-- Share Circle and invite cirle. -->
+            <!-- <div
+                class="w-full bg-black hover:text-yellow-500 cursor-pointer mt-2 dark:bg-white text-center p-2  dark:shadow-lg dark:text-bleck text-white font-semibold">
+
+                Share Circle (Anonymous)
+
+            </div> -->
+
+
+
+
+        </div> <!-- End of Left Column -->
+        <div class="w-full transition-colors duration-1000 lg:w-6/12 md:w-6/12 h-full dark:bg-white dark:shadow-lg bg-gray-800 md:bg-gray-800 md:mr-2 p-1 overflow-y-auto "
+            id="Content_Column">
+            <section class=""> <!-- This is the bar Content Section which is used to filter stuff-->
+                <div
+                    class="w-full bg-gray-900 text-yellow-500 flex flex-row dark:bg-white dark:shadow-lg dark:text-black">
+                    <span class="p-2 text-lg hidden md:block">
+                        Filter topics by:
+                    </span>
+                    <span class="p-2 text-lg md:hidden">
+                        Filters:
+                    </span>
+                    <span class="text-center ml-auto">
+                        <div class="flex text-base md:text-lg flex-row p-1">
+                            <div class=" bg-black md:ml-2 md:mr-2 mr-4 p-1 rounded-md hover:text-yellow-600
+                             dark:bg-white dark:text-black dark:hover:bg-gray-200" id="current_active_filter_new"
+                                data-filter_value="New">
+                                <label class="font-bold cursor-pointer hidden md:block">New ⏱</label>
+                                <label class="font-bold cursor-pointer md:hidden">⏱</label>
+                            </div>
+                            <div class=" bg-black ml-4 mr-4 md:ml-2 md:mr-2 p-1 rounded-md hover:text-yellow-600
+                            dark:bg-white dark:text-black dark:hover:bg-gray-200" id="current_active_filter_Rising"
+                                data-filter_value="Rising">
+                                <label class="font-bold cursor-pointer hidden md:block">Rising 📊</label>
+                                <label class="font-bold cursor-pointer md:hidden">📊</label>
+                            </div>
+                            <div class="bg-black ml-4 md:ml-2 mr-2 p-1 rounded-md hover:text-yellow-600
+                            dark:bg-white dark:text-black dark:hover:bg-gray-200" id="current_active_filter_Hot"
+                                data-filter_value="Hot">
+                                <label class="font-bold cursor-pointer hidden md:block">Hot 🔥</label>
+                                <label class="font-bold cursor-pointer md:hidden">🔥</label>
+                            </div>
+                        </div>
+                    </span>
+                </div> <!-- End of bar Content Section which is used to filter stuff-->
+
+
+                <section class="w-full mt-2">
+                    <div id="Asker" class="hidden md:block transition-colors duration-1000">
+
+                    </div>
+                </section> <!-- Editor Place to ask questions -->
+
+                <section id="feed_starts_here" class="w-full">
+
+
+                </section>
+
+
+
+            </section>
+
+
+
+
+
+
+            <section class="mt-2"> <!-- This is where an editor comes in.-->
+
+
+            </section> <!-- End of where an editor comes in.-->
+
+
+
+
+
+
+
+        </div> <!-- End of Content Column -->
+
+        <div class="hidden fixed w-11/12 pb-20 md:pb-0 z-20 bg-gray-900 dark:bg-white dark:shadow-lg md:static md:block lg:block lg:w-2/12 md:w-2/12 h-full md:bg-gray-900 rounded-md p-2 overflow-y-auto"
+            id="Right_Column">
+            <div class="text-center"> <!-- This is the Search Bar with drop down options.-->
+                <div class="font-bold text-lg text-center text-yellow-600 mb-2 border-b-2 border-yellow-300"> <label
+                        id="remo">Information Board</label> </div>
+                <select id="InfoBoardTitle"
+                    class="appearance-none cursor-pointer w-full p-2 font-bold text-lg text-yellow-500 text-center outline-none rounded-md bg-black hover:bg-gray-900 dark:bg-gray-100 dark:text-black dark:hover:bg-gray-200">
+                </select>
+            </div> <!-- End of Search Bar with drop down options. -->
+            <div
+                class="w-full flex flex-col  justify-between items-center bg-gray-900 mt-2 overflow-auto dark:bg-white dark:shadow-lg dark:text-black">
+                <!-- Announcement Section -->
+                <div id="subtilteInfoBoard"
+                    class="font-bold w-full text-xl text-center bg-transparent text-yellow-600 p-2 mb-2 border-b-2 border-yellow-300 shadow-2xl">
+                    Candidates
+                </div>
+            </div> <!-- End of Announcement Section -->
+            <div id="InfoBoardCards" class="w-full overflow-y-auto flex flex-col bg-transparent">
+
+            </div>
+        </div> <!-- End of Right Column -->
+
+
+    </section> <!-- End of Three Division Section -->
+
+    <script>
+        // if ('serviceWorker' in navigator) {
+        //     let r1 = navigator.serviceWorker.register("/static/js/sw.js", {
+        //         scope: "/static/js/"
+        //     }).then(res =>
+        //         console.log('Service Worker registration successful with scope: ',
+        //             res.scope
+        //         )
+        //     )
+        // }
+    </script>
+
+    <!-- <script src="{{ url_for('static', filename='js/notification_engine_sse.js') }}"></script> -->
+
+
+
+
+
+
+</body>
+
+
+</html>

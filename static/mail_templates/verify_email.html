@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css')}}">
+    <script src="{{ url_for('static',filename='js/jquery.js')}}"></script>
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+
+                // if (!/^(GET|HEAD|OPTIONS|TRACE|POST|DELETE)$/i.test(settings.type) && !this.crossDomain) {
+                console.log(csrf_token);
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                // }
+            }
+        });
+    </script>
+    <title>Email - Verification</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static',filename='favicons/site.webmanifest')}}">
+</head>
+
+<body>
+    <section class="min-h-screen flex items-stretch text-white ">
+        <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
+            style="background-image:url({{ url_for('static',filename='logo/cogs-gears.gif')}})">
+            <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+            <div class="w-full px-24 z-10">
+                <h1 class="text-5xl font-bold text-left tracking-wide">Securely Login into <br> Galam </h1>
+                <p class="text-3xl my-4">Let's be vocal for better governance!</p>
+                <p class="text-sm my-4">Version 1.0</p>
+            </div>
+
+        </div>
+        <div class="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0"
+            style="background-color: #161616; ">
+            <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
+                style="background-image: url({{ url_for('static',filename='logo/cogs-gears.gif')}});">
+                <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+            </div>
+            <div class="w-full py-6 z-20">
+                <h4 class="my-6 text-2xl text-center text-yellow-500 font-bold">
+                    Email verification is an important step to identify you
+                </h4>
+                <p class="text-gray-100 font-bold text-xl">
+                    Enter the OTP sent to your email
+                </p>
+                <p class="text-gray-100 mb-4 text-sm">
+                    Tip: Press Tab to move to next input
+                </p>
+
+                <form id="Verify_Email" action="{{url_for('verify_otp_email')}}" enctype="multipart/form-data"
+                    class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto" method="post">
+                    <div class="flex flex-row mt-2 justify-center items-center text-black">
+                        <input type="text" name="Field1" class="w-12 h-12 mr-2 p-2 text-center border rounded-lg"
+                            maxlength="1" />
+                        <input type="text" name="Field2" class="w-12 h-12 mr-2 p-2 text-center border rounded-lg"
+                            maxlength="1" />
+                        <input type="text" name="Field3" class="w-12 h-12 mr-2 p-2 text-center border rounded-lg"
+                            maxlength="1" />
+                        <input type="text" name="Field4" class="w-12 h-12 mr-2 p-2 text-center border rounded-lg"
+                            maxlength="1" />
+                        <input type="text" name="Field5" class="w-12 h-12 mr-2 p-2 text-center border rounded-lg"
+                            maxlength="1" />
+                    </div>
+                    <div id="status" class="">
+                    </div>
+                    <div class="px-4 pb-2 pt-4">
+                        <button type="submit"
+                            class="uppercase block w-full p-4 text-lg rounded-full bg-gray-800 hover:bg-gray-900 hover:text-yellow-500 font-bold focus:outline-none">Verify
+                            and go to Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html
